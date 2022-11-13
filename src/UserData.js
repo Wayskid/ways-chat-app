@@ -3,6 +3,7 @@ export default [
       id: 1,
       name: "Richard Ways",
       phoneNum: 2348054677826,
+      email: "wayskidding@gmail.com",
       status: "Good to be alive",
       messages: [
          {
@@ -68,6 +69,7 @@ export default [
       id: 2,
       name: "Ify Ella",
       phoneNum: 2348054677826,
+      email: "ifyella@hotmail.com",
       status: "Good to be alive",
       messages: [
          {
@@ -133,6 +135,7 @@ export default [
       id: 3,
       name: "Destiny Omono",
       phoneNum: 2348054677826,
+      email: "destinyomo@gmail.com",
       status: "Good to be alive",
       messages: [
          {
@@ -190,7 +193,8 @@ export default [
    },
    {
       id: 4,
-      name: "Apkoli Emma",
+      name: "Akpoli Emma",
+      email: "akpoli@gmail.com",
       phoneNumber: 2348085546789,
       status: "Available for spending",
       messages: [],
@@ -201,6 +205,7 @@ export default [
    {
       id: 5,
       name: "Joshua Aguye",
+      email: "joshua@gmail.com",
       phoneNumber: 2347045678902,
       status: "Ask for deals",
       messages: [],
@@ -211,6 +216,7 @@ export default [
    {
       id: 6,
       name: "Matthew Johson",
+      email: "mattjohg@gmail.com",
       phoneNumber: 2348045678987,
       status: "Online",
       messages: [],
@@ -221,6 +227,7 @@ export default [
    {
       id: 7,
       name: "Faith Eze",
+      email: "faitheze@gmail.com",
       phoneNumber: 2348012345678,
       status: "Busy",
       messages: [],
@@ -231,6 +238,7 @@ export default [
    {
       id: 8,
       name: "Andrew Tate",
+      email: "tateandrewg@gmail.com",
       phoneNumber: 2348172565678,
       status: "Busy",
       messages: [],
@@ -241,6 +249,7 @@ export default [
    {
       id: 9,
       name: "Glory Chima",
+      email: "glorychim@yahoo.com",
       phoneNumber: 2348010918267,
       status: "Busy",
       messages: [],
@@ -251,6 +260,7 @@ export default [
    {
       id: 10,
       name: "Lawson Chem",
+      email: "lawbaba@gmail.com",
       phoneNumber: 2348012982722,
       status: "Money Man",
       messages: [],
@@ -261,6 +271,7 @@ export default [
    {
       id: 11,
       name: "Ali Usman",
+      email: "aliusman@gmail.com",
       phoneNumber: 2348010937878,
       status: "Availible",
       messages: [],

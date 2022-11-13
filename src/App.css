@@ -21,8 +21,16 @@
   border-radius: 5px;
 }
 
+::-webkit-inner-spin-button{
+  display: none;
+}
+
 input:focus::placeholder{
   color: transparent;
+}
+
+::placeholder{
+  color: #323232;
 }
 
 body{
@@ -43,6 +51,7 @@ body{
   background-color: #ffffff;
   border-radius: 10px;
   color: #323232;
+  position: relative;
 }
 
 .aside{
@@ -69,6 +78,20 @@ body{
   border-bottom: 1px solid #323232;
 }
 
+.archive{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.searchPlus{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .searchInput{
   border-radius: 2px;
   border: 1px solid #323232;
@@ -79,18 +102,16 @@ body{
   width: 100%;
 }
 
-.archive{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  cursor: pointer;
-}
-
 .disappear{
   opacity: 0;
   pointer-events: none;
 }
+
+.searchPlus>:last-child{
+  cursor: pointer;
+  color: #046c71;
+}
+
 
 .chatList{
   display: grid;
@@ -243,7 +264,7 @@ body{
   border-bottom-right-radius: 10px;
 }
 
-form{
+.Main form{
   display: flex;
   background-color: #ffffff;
   padding: 6px 10px;
@@ -312,3 +333,53 @@ form button{
   left: 50%;
   translate: -50% 0;
 }
+
+/*Add contact*/
+.newContactPopup{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  color: #323232;
+  background-color: #035459b0;
+  width: 100%;
+  user-select: none;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  border-radius: 10px;
+  display: none;
+}
+
+.showAddNewContact{
+  display: grid;
+}
+
+.popupContent{
+  display: grid;
+  gap: 1rem;
+  background-color: #ffffff;
+}
+
+.newContactHead{
+  background-color: #13aab1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.closeNewContactBtn{
+  cursor: pointer;
+}
+
+.newContactForm{
+  display: grid;
+  gap: 0.7rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.newContactForm input{
+  background-color: #13a9b163;
+  padding-block: 0.5rem;
+}
+

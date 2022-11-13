@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
+import uuid from "react-uuid";
 import UserData from "../UserData";
 
 const MsgAppContext = createContext();
@@ -51,10 +52,55 @@ export function MsgAppProvider ({children}){
             return null
          }
       }))
-
-      const randNum = Math.floor(Math.random() * chatList.length)
-      console.log(randNum);
    },[chatList])
+
+   //Add New Contact
+   const [ contactWindowShown, setContactWindowShown ] = useState(false);
+   const [ newContactInfo, setNewContactInfo ] = useState({
+      id: uuid(),
+      name: "",
+      number: "",
+      email: "",
+      messages: [],
+      lastModified: Date.now(),
+      isRead: true,
+      archived: false
+   });
+
+   function handleShowcontactWindow(){
+      setContactWindowShown(!contactWindowShown)
+   }
+
+   function handleNewContactInput(e){
+      setNewContactInfo(prevInfo=>{
+         return {
+            ...prevInfo,
+            [e.target.name]: e.target.value
+         }
+      })
+   }
+
+   function handleSaveContact(e){
+      e.preventDefault();
+
+      if(
+            newContactInfo.name.trim() &&
+            newContactInfo.email.trim() &&
+            newContactInfo.email.trim()
+         ){
+         setChatList([...chatList, newContactInfo])
+         handleShowcontactWindow()
+
+         setNewContactInfo({
+            ...newContactInfo,
+            id: uuid(),
+            name: "",
+            number: "",
+            email: ""
+         })
+         setActiveChatID(newContactInfo.id)
+      }
+   }
 
 
 
@@ -77,6 +123,11 @@ export function MsgAppProvider ({children}){
       handleAltCloseMenu,
       setArchiveList,
       archiveList,
+      handleShowcontactWindow,
+      contactWindowShown,
+      handleNewContactInput,
+      newContactInfo,
+      handleSaveContact,
    }}>
       {children}
    </MsgAppContext.Provider>

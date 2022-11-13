@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import MsgAppContext from "../context/MsgAppContext";
 import ChatCard from "./ChatCard";
 
@@ -12,6 +13,7 @@ export default function Aside() {
       setSearchVal,
       handleAltCloseMenu,
       archiveList,
+      handleShowcontactWindow
    } = useContext(MsgAppContext);
 
    //Search Contacts
@@ -55,12 +57,15 @@ export default function Aside() {
                   <h3>Archive</h3>
                   {!archiveShown && <p>{archiveList.length}</p>}
                </div>
-               <input
-                  type="text"
-                  placeholder="Search Contacts..."
-                  className={`searchInput ${archiveShown && "disappear"}`}
-                  onChange={handleSearch}
-               />
+               <div className={`searchPlus ${archiveShown && "disappear"}`} >
+                  <input
+                     type="text"
+                     placeholder="Search Contacts..."
+                     className="searchInput"
+                     onChange={handleSearch}
+                  />
+                  <FaPlus onClick={handleShowcontactWindow}/>
+               </div>
             </div>
             <ul className="chatList">
                {!archiveShown ? (
