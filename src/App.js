@@ -1,17 +1,29 @@
-import './App.css';
-import AddContact from './components/AddContact';
-import Aside from './components/Aside';
-import Main from './components/Main';
-import { MsgAppProvider } from './context/MsgAppContext';
+import "./index.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/Signup";
+import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./pages/PrivateRoute";
+import ActiveChatProvider from "./contexts/ActiveChatContext";
+import { ChatAppProvider } from "./contexts/ChatAppContext";
 
 export default function App() {
   return (
-    <MsgAppProvider>
-      <div className="App">
-        <Aside />
-        <Main />
-        <AddContact />
-      </div>
-    </MsgAppProvider>
+    <ActiveChatProvider>
+      <ChatAppProvider>
+        <Routes>
+          <Route path="/Login" element={<Login />}></Route>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route path="/Signup" element={<SignUp />}></Route>
+        </Routes>
+      </ChatAppProvider>
+    </ActiveChatProvider>
   );
 }

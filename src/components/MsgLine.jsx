@@ -1,14 +1,33 @@
-import React from 'react'
+// import { useContext } from "react";
+// import { ActiveChatContext } from "../contexts/ActiveChatContext";
 
-export default function MsgLine({message}) {
+import { useContext, useEffect, useRef } from "react";
+import AuthContext from "../contexts/AuthContext";
+
+export default function MsgLine({ message }) {
+  const { currentUser } = useContext(AuthContext);
+
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [message]);
+
   return (
-   <li className={`messageLine ${message.source === "user" ? "justifyRight" : "justifyLeft"}`}>
-      <p className="msg">{message.msg}</p>
-      <p className="timeSent">{new Date(message.timeStamp).toLocaleTimeString([],{
-         hour:"2-digit",
-         minute:"2-digit",
-         hour12: true
-      })}</p>
-   </li>
-  )
+    <li
+      className={`chat  relative ${
+        currentUser.uid === message.senderId ? "chat-end" : "chat-start"
+      }`}
+      ref={scrollRef}
+    >
+      <div className="chat-bubble py-[8px] bg-color-secondary max-w-[65%]">
+        {message.text}
+      </div>
+      <time className="text-xs font-medium text-color-secondary absolute bottom-[-0.8rem] px-[1rem]">
+        {/* {msgDate} */}
+      </time>
+    </li>
+
+    // <div className="chat chat-end">
+  );
 }
