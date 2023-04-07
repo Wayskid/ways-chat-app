@@ -12,7 +12,6 @@ export default function App() {
     <ActiveChatProvider>
       <ChatAppProvider>
         <Routes>
-          <Route path="/Login" element={<Login />}></Route>
           <Route
             path="/"
             element={
@@ -21,6 +20,7 @@ export default function App() {
               </PrivateRoute>
             }
           ></Route>
+          <Route path="/Login" element={<Login />}></Route>
           <Route path="/Signup" element={<SignUp />}></Route>
         </Routes>
       </ChatAppProvider>
