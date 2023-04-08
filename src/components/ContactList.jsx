@@ -1,19 +1,26 @@
 import ContactCard from "./ContactCard";
 import { useContext, useEffect } from "react";
-import ChatAppContext from "../contexts/ChatAppContext";
-import AuthContext from "../contexts/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
+import ChatAppContext from "../contexts/chatAppContext";
+import AuthContext from "../contexts/AuthContext";
 
 export default function ContactList() {
   const { state, handleSelect, dispatch } = useContext(ChatAppContext);
   const { currentUser } = useContext(AuthContext);
 
+  //GET USER CONTACT LIST
   useEffect(() => {
     function getContactList() {
-      const unSub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-        dispatch({ type: "CONTACT_LIST", payload: Object.entries(doc.data()) });
-      });
+      const unSub = onSnapshot(
+        doc(db, "userContactList", currentUser.uid),
+        (doc) => {
+          dispatch({
+            type: "CONTACT_LIST",
+            payload: Object.entries(doc.data()),
+          });
+        }
+      );
 
       return () => {
         unSub();

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { ImFilePicture } from "react-icons/im";
-import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
-import ChatAppContext from "../contexts/ChatAppContext";
+import ChatAppContext from "../contexts/chatAppContext";
 
 export default function Signup() {
   const { handleSignup, state, dispatch } = useContext(ChatAppContext);
@@ -87,7 +86,16 @@ export default function Signup() {
         </label>
         <button
           type="submit"
-          className="h-[2.5rem] bg-color-secondary hover:bg-[#1a6ba9] ease-in transition-all rounded-lg"
+          className="h-[2.5rem] bg-color-secondary hover:bg-[#1a6ba9] ease-in transition-all rounded-lg disabled:opacity-50"
+          //
+          disabled={
+            state.signupInputs.signupDName.length &&
+            state.signupInputs.signupEmail.length &&
+            state.signupInputs.signupPass.length &&
+            state.user_avatar
+              ? false
+              : true
+          }
         >
           Sign Up
         </button>
@@ -96,14 +104,6 @@ export default function Signup() {
             Looks like you already have an account
           </p>
         )}
-        <p className="text-center font-medium text-sm">OR</p>
-        <button
-          type="submit"
-          className="flex text-[white] rounded-md justify-self-center bg-[#4c8bf5] items-center pl-[2px] pr-[0.55rem] h-[35px] gap-2 font-semibold text-sm"
-        >
-          <FcGoogle className="bg-neutral-50 h-[85%] w-[30px] rounded-md" />
-          Sign Up with Google
-        </button>
         <button className="text-xs">
           Already have an account?
           <Link to="/Login" className="text-[#4c8bf5] font-medium">

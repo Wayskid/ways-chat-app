@@ -11,8 +11,6 @@ export const InitialState = {
   signup_err: false,
   loginError: false,
   user_avatar: null,
-  photo_url:
-    "https://firebasestorage.googleapis.com/v0/b/ways-chat-app-b4b87.appspot.com/o/285655_user_icon.png?alt=media&token=3cf1e8fa-a731-461c-a370-9aca28c49a00",
   search_val: "",
   search_result: null,
   search_err: false,

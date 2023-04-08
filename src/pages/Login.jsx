@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
-import ChatAppContext from "../contexts/ChatAppContext";
+import ChatAppContext from "../contexts/chatAppContext";
 
 export default function Login() {
   const { handleLogin, dispatch, state } = useContext(ChatAppContext);
@@ -11,8 +10,8 @@ export default function Login() {
       className="signup w-signup-width h-signup-height bg-color-primary grid justify-items-center content-center rounded-lg text-txt-color"
       onSubmit={handleLogin}
     >
-      <div className="inputsContainer w-[70%] grid rounded-lg gap-4">
-        <h1 className="text-2xl text-center font-bold">WaysChat</h1>
+      <div className="inputsContainer w-[70%] grid rounded-lg gap-6">
+        <h1 className="text-3xl text-center font-bold mb-5">WaysChat</h1>
         <label>
           <input
             required
@@ -52,18 +51,10 @@ export default function Login() {
           Sign In
         </button>
         {state.loginError && (
-          <p className="text-center font-medium text-xs">
+          <p className="text-center font-medium text-xs text-[#e52f2f]">
             Email or Password is wrong
           </p>
         )}
-        <p className="text-center font-medium text-sm">OR</p>
-        <button
-          type="submit"
-          className="flex text-[white] rounded-md justify-self-center bg-[#4c8bf5] items-center pl-[2px] pr-[0.5rem] h-[30px] gap-2 font-semibold text-sm"
-        >
-          <FcGoogle className="bg-neutral-50 h-[85%] w-[27px] rounded-md" />
-          Sign In with Google
-        </button>
         <button className="text-xs">
           Don't have an account?{" "}
           <Link to="/Signup" className="text-[#4c8bf5] font-medium">

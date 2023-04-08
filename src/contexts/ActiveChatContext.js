@@ -4,7 +4,9 @@ import AuthContext from "./AuthContext";
 export const ActiveChatContext = createContext();
 
 export default function ActiveChatProvider({ children }) {
+
   const { currentUser } = useContext(AuthContext);
+
   const InitialState = {
     chatId: "null",
     user: {},
@@ -21,6 +23,11 @@ export default function ActiveChatProvider({ children }) {
               ? currentUser.uid + action.payload.uid
               : action.payload.uid + currentUser.uid,
         };
+      case "DELETE_ACTIVE_CHAT":
+        return {
+          chatId: "null",
+          user: {},
+        };
 
       default:
         return state;
@@ -29,6 +36,7 @@ export default function ActiveChatProvider({ children }) {
 
   const [state, dispatch] = useReducer(ActiveChatReducer, InitialState);
 
+  //GET ACTIVE USER
   function handleActiveChat(user) {
     dispatch({ type: "CHANGE_ACTIVE_CHAT", payload: user });
   }

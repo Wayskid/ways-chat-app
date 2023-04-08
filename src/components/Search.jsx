@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ChatAppContext from "../contexts/ChatAppContext";
+import ChatAppContext from "../contexts/chatAppContext";
 
 export default function Search() {
   const { handleSearch, state } = useContext(ChatAppContext);

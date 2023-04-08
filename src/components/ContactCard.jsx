@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
+import moment from "moment";
 
 export default function ContactCard({ contactDet }) {
   const { handleActiveChat, activeChatState } = useContext(ActiveChatContext);
@@ -28,11 +29,9 @@ export default function ContactCard({ contactDet }) {
           {contactDet.lastMsg?.text.length > 23 && "..."}
         </p>
       </div>
-      <div className="lastMod grid text-center h-[100%] w-[20%]">
-        <p className="lastTime text-xs flex items-end justify-center self-end">
-          {/* {contactDet.date} */}
-        </p>
-      </div>
+      <p className="lastTime text-xs">
+        {moment(contactDet.date?.toDate()).format("LT")}
+      </p>
     </li>
   );
 }

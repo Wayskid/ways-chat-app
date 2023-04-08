@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import MsgLine from "./MsgLine";
-import ChatAppContext from "../contexts/ChatAppContext";
+import ChatAppContext from "../contexts/chatAppContext";
 
 export default function MessageList() {
   const { state } = useContext(ChatAppContext);

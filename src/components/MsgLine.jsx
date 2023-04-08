@@ -1,14 +1,13 @@
-// import { useContext } from "react";
-// import { ActiveChatContext } from "../contexts/ActiveChatContext";
-
 import { useContext, useEffect, useRef } from "react";
 import AuthContext from "../contexts/AuthContext";
+import moment from "moment/moment";
 
 export default function MsgLine({ message }) {
   const { currentUser } = useContext(AuthContext);
 
   const scrollRef = useRef();
 
+  //SCROLL TO THE BOTTOM
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [message]);
@@ -20,11 +19,17 @@ export default function MsgLine({ message }) {
       }`}
       ref={scrollRef}
     >
-      <div className="chat-bubble py-[8px] bg-color-secondary max-w-[65%]">
+      <div
+        className={`chat-bubble py-[8px]  max-w-[65%] ${
+          currentUser.uid === message.senderId
+            ? "bg-color-primary "
+            : "bg-color-secondary"
+        }`}
+      >
         {message.text}
       </div>
-      <time className="text-xs font-medium text-color-secondary absolute bottom-[-0.8rem] px-[1rem]">
-        {/* {msgDate} */}
+      <time className="text-xs font-medium text-color-secondary absolute bottom-[-0.8rem] px-[0rem]">
+        {moment(message.date.toDate()).calendar()}
       </time>
     </li>
 
