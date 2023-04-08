@@ -5,7 +5,7 @@ import SignUp from "./pages/Signup";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./pages/PrivateRoute";
 import ActiveChatProvider from "./contexts/ActiveChatContext";
-import { ChatAppProvider } from "./contexts/chatAppContext";
+import { ChatAppProvider } from "./contexts/ChatAppContext";
 
 export default function App() {
   return (

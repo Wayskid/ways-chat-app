@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ImFilePicture } from "react-icons/im";
 import { useContext } from "react";
-import ChatAppContext from "../contexts/chatAppContext";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function Signup() {
   const { handleSignup, state, dispatch } = useContext(ChatAppContext);

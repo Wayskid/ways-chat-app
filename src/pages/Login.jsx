@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import ChatAppContext from "../contexts/chatAppContext";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function Login() {
   const { handleLogin, dispatch, state } = useContext(ChatAppContext);

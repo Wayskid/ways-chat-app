@@ -2,7 +2,7 @@ import ContactCard from "./ContactCard";
 import { useContext, useEffect } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import ChatAppContext from "../contexts/chatAppContext";
+import ChatAppContext from "../contexts/ChatAppContext";
 import AuthContext from "../contexts/AuthContext";
 
 export default function ContactList() {

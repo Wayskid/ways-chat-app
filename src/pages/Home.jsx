@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Aside from "../components/Aside";
 import Main from "../components/Main";
-import ChatAppContext from "../contexts/chatAppContext";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function Home() {
   const { state } = useContext(ChatAppContext);

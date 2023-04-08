@@ -5,7 +5,7 @@ import { IoIosLaptop } from "react-icons/io";
 import { VscArrowBoth } from "react-icons/vsc";
 import { GiSmartphone } from "react-icons/gi";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
-import ChatAppContext from "../contexts/chatAppContext";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function Main() {
   const { activeChatState } = useContext(ActiveChatContext);
