@@ -18,6 +18,10 @@ export const InitialState = {
   message_list: [],
   messageVal: "",
   loader: false,
+  img_preview: null,
+  img_sent: null,
+  view_img: false,
+  clicked_img: null,
 };
 
 export function ChatAppReducer(state, action) {
@@ -87,6 +91,26 @@ export function ChatAppReducer(state, action) {
       return {
         ...state,
         loader: action.payload,
+      };
+    case "IMG_PREVIEW":
+      return {
+        ...state,
+        img_preview: action.payload,
+      };
+    case "IMG_SENT":
+      return {
+        ...state,
+        img_sent: action.payload,
+      };
+    case "VIEW_IMG":
+      return {
+        ...state,
+        view_img: action.payload,
+      };
+    case "CLICKED_IMG":
+      return {
+        ...state,
+        clicked_img: action.payload,
       };
     default:
       return state;

@@ -25,7 +25,12 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import { ActiveChatContext } from "./ActiveChatContext";
 import uuid from "react-uuid";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 const ChatAppContext = createContext();
 
@@ -227,6 +232,66 @@ export function ChatAppProvider({ children }) {
     dispatch({ type: "LOADER", payload: false });
   }
 
+  //IMAGE PREVIEW
+  async function handlePreviewImg(e) {
+    dispatch({ type: "IMG_SENT", payload: e.target.files[0] });
+
+    if (e.target.files[0]) {
+      const imgRef = ref(storage, `imgPreview/${uuid()}`);
+
+      await uploadBytes(imgRef, e.target.files[0]);
+      const downloadURL = await getDownloadURL(imgRef);
+      dispatch({ type: "IMG_PREVIEW", payload: downloadURL });
+    }
+  }
+
+  //CANCEL SEND IMAGE
+  function handleCancelImage() {
+    // const desertRef = ref(storage, `imgPreview/${state.img_sent}`);
+
+    // deleteObject(desertRef).then(() => {
+    dispatch({ type: "IMG_PREVIEW", payload: null });
+    dispatch({ type: "IMG_SENT", payload: null });
+    // });
+  }
+
+  //SEND IMAGE
+  async function handleSendImg() {
+    dispatch({ type: "LOADER", payload: true });
+    handleCancelImage();
+
+    await updateDoc(doc(db, "chats", activeChatState.chatId), {
+      [currentUser.uid + ".messages"]: arrayUnion({
+        id: uuid(),
+        image: state.img_preview,
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+      }),
+      [activeChatState.user.uid + ".messages"]: arrayUnion({
+        id: uuid(),
+        image: state.img_preview,
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+      }),
+    });
+
+    await updateDoc(doc(db, "userContactList", currentUser.uid), {
+      [activeChatState.chatId + ".lastMsg"]: {
+        text: "Image",
+      },
+      [activeChatState.chatId + ".date"]: serverTimestamp(),
+    });
+
+    await updateDoc(doc(db, "userContactList", activeChatState.user.uid), {
+      [activeChatState.chatId + ".lastMsg"]: {
+        text: "Image",
+      },
+      [activeChatState.chatId + ".date"]: serverTimestamp(),
+    });
+
+    dispatch({ type: "LOADER", payload: false });
+  }
+
   //DELETE USER
   async function handleDeleteChat(user) {
     const combinedId =
@@ -272,6 +337,16 @@ export function ChatAppProvider({ children }) {
     } catch {}
   }
 
+  function handleViewImage(e) {
+    dispatch({ type: "VIEW_IMG", payload: true });
+    dispatch({ type: "CLICKED_IMG", payload: e.target.src });
+  }
+
+  function handleCloseViewImage() {
+    dispatch({ type: "VIEW_IMG", payload: false });
+    // dispatch({ type: "CLICKED_IMG", payload: null });
+  }
+
   return (
     <ChatAppContext.Provider
       value={{
@@ -285,6 +360,11 @@ export function ChatAppProvider({ children }) {
         handleSendMessage,
         handleDeleteChat,
         handleClearChat,
+        handlePreviewImg,
+        handleCancelImage,
+        handleSendImg,
+        handleViewImage,
+        handleCloseViewImage,
       }}
     >
       {children}

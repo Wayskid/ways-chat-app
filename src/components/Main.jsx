@@ -1,20 +1,19 @@
 import { useContext } from "react";
 import MessageList from "./MessageList";
-import { FiSend } from "react-icons/fi";
 import { IoIosLaptop } from "react-icons/io";
 import { VscArrowBoth } from "react-icons/vsc";
 import { GiSmartphone } from "react-icons/gi";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
 import ChatAppContext from "../contexts/ChatAppContext";
+import MsgInput from "./MsgInput";
 
 export default function Main() {
   const { activeChatState } = useContext(ActiveChatContext);
   const {
-    handleSendMessage,
     state,
-    dispatch,
     handleDeleteChat,
     handleClearChat,
+    handleSendImg,
   } = useContext(ChatAppContext);
 
   return (
@@ -65,26 +64,20 @@ export default function Main() {
             </div>
           </header>
           <MessageList />
-          <form
-            className="bg-neutral-50 h-[50px] px-[10px] flex justify-center items-center"
-            onSubmit={handleSendMessage}
-          >
-            <div className="w-[95%] flex gap-2">
-              <input
-                required
-                type="text"
-                placeholder="Type a message"
-                className="w-[100%] bg-transparent outline-none text-lg text-color-secondary placeholder:text-color-secondary"
-                value={state.messageVal}
-                onChange={(e) =>
-                  dispatch({ type: "MESSAGE_VAL", payload: e.target.value })
-                }
-              />
-              <button>
-                <FiSend className="text-xl text-color-secondary" />
+
+          {!state.img_preview ? (
+            <MsgInput />
+          ) : (
+            <div className="flex bg-neutral-50 h-[50px] items-center justify-center">
+              <button
+                type="button"
+                className="bg-color-primary w-[60%] text-lg rounded-md hover:bg-color-secondary ease-in transition-all py-1"
+                onClick={handleSendImg}
+              >
+                Send
               </button>
             </div>
-          </form>
+          )}
         </>
       ) : (
         <div className="bg-color-secondary grid gap-2 text-center absolute top-1/2 translate-y-[-50%] left-1/2 translate-x-[-50%] w-[80%]">

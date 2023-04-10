@@ -1,9 +1,11 @@
 import { useContext, useEffect, useRef } from "react";
 import AuthContext from "../contexts/AuthContext";
 import moment from "moment/moment";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function MsgLine({ message }) {
   const { currentUser } = useContext(AuthContext);
+  const { handleViewImage } = useContext(ChatAppContext);
 
   const scrollRef = useRef();
 
@@ -19,15 +21,24 @@ export default function MsgLine({ message }) {
       }`}
       ref={scrollRef}
     >
-      <div
-        className={`chat-bubble py-[8px]  max-w-[65%] ${
-          currentUser.uid === message.senderId
-            ? "bg-color-primary "
-            : "bg-color-secondary"
-        }`}
-      >
-        {message.text}
-      </div>
+      {message.text ? (
+        <p
+          className={`chat-bubble py-[8px]  max-w-[65%] ${
+            currentUser.uid === message.senderId
+              ? "bg-color-primary "
+              : "bg-color-secondary"
+          }`}
+        >
+          {message.text}
+        </p>
+      ) : (
+        <img
+          src={message.image}
+          alt="sent pic"
+          className="h-[10rem] rounded-lg cursor-pointer"
+          onClick={handleViewImage}
+        />
+      )}
       <time className="text-xs font-medium text-color-secondary absolute bottom-[-0.8rem] px-[0rem]">
         {moment(message.date.toDate()).calendar()}
       </time>
