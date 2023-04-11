@@ -14,7 +14,7 @@ export default function MsgInput() {
       <input
         id="addImg"
         type="file"
-        accept="image/*"
+        accept="image/png, image/gif, image/jpeg"
         className="hidden"
         onChange={handlePreviewImg}
       />

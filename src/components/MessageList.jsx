@@ -14,10 +14,14 @@ export default function MessageList() {
       })}
       {state.img_preview && (
         <div className="absolute top-0 flex bg-color-primary h-[calc(100%-50px)] w-[100%] bg-opacity-60">
-          <div className="self-end px-7 pb-2 flex ">
-            <img src={state.img_preview} alt="preview" />
+          <div className="self-end px-2 pb-2 flex h-[18rem] w-[20rem] mx-auto">
+            <img
+              src={state.img_preview}
+              alt="preview"
+              className="h-[100%] w-[100%]"
+            />
             <button type="button" onClick={handleCancelImage}>
-              <AiFillCloseCircle className="top-1 right-1 text-3xl text-color-secondary" />
+              <AiFillCloseCircle className="absolute top-1 right-1 text-3xl text-[white]" />
             </button>
           </div>
         </div>
@@ -45,6 +49,7 @@ export default function MessageList() {
           <a
             href={state.clicked_img}
             target="_blank"
+            rel="noreferrer"
             download="WaysChatImage"
             className="w-[100%]"
           >

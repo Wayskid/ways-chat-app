@@ -5,6 +5,7 @@ import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function Home() {
   const { state } = useContext(ChatAppContext);
+
   return (
     <div className="home w-home-width h-home-height rounded-lg text-txt-color relative flex overflow-hidden">
       <Aside />

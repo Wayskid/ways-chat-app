@@ -22,7 +22,7 @@ export default function ContactCard({ contactDet }) {
           />
         </div>
       </div>
-      <div className="grid w-[60%]">
+      <div className="grid w-[70%]">
         <p className="text-xl font-medium">{contactDet.userInfo.displayName}</p>
         <p className="lastMessage text-sm">
           {contactDet.lastMsg?.text.slice(0, 23)}

@@ -16,21 +16,16 @@ import {
   updateDoc,
   serverTimestamp,
   getDoc,
-  onSnapshot,
   arrayUnion,
   Timestamp,
   deleteField,
+  onSnapshot,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import { ActiveChatContext } from "./ActiveChatContext";
 import uuid from "react-uuid";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const ChatAppContext = createContext();
 
@@ -175,7 +170,7 @@ export function ChatAppProvider({ children }) {
     dispatch({ type: "SEARCH_VAL", payload: "" });
   }
 
-  //GET USER CHATS
+  //GET USER MESSAGES
   useEffect(() => {
     const unSub = onSnapshot(
       doc(db, "chats", activeChatState.chatId),
@@ -183,7 +178,7 @@ export function ChatAppProvider({ children }) {
         doc.exists() &&
           dispatch({
             type: "MESSAGE_LIST",
-            payload: doc.data()[currentUser.uid].messages,
+            payload: doc.data()[currentUser?.uid]?.messages,
           });
       }
     );
@@ -191,7 +186,7 @@ export function ChatAppProvider({ children }) {
     return () => {
       unSub();
     };
-  }, [activeChatState, currentUser]);
+  }, [activeChatState.chatId, currentUser?.uid, dispatch]);
 
   //SEND A MESSAGE
   async function handleSendMessage(e) {
@@ -247,12 +242,8 @@ export function ChatAppProvider({ children }) {
 
   //CANCEL SEND IMAGE
   function handleCancelImage() {
-    // const desertRef = ref(storage, `imgPreview/${state.img_sent}`);
-
-    // deleteObject(desertRef).then(() => {
     dispatch({ type: "IMG_PREVIEW", payload: null });
     dispatch({ type: "IMG_SENT", payload: null });
-    // });
   }
 
   //SEND IMAGE
@@ -337,14 +328,15 @@ export function ChatAppProvider({ children }) {
     } catch {}
   }
 
+  //View Image
   function handleViewImage(e) {
     dispatch({ type: "VIEW_IMG", payload: true });
     dispatch({ type: "CLICKED_IMG", payload: e.target.src });
   }
 
+  //Close view image
   function handleCloseViewImage() {
     dispatch({ type: "VIEW_IMG", payload: false });
-    // dispatch({ type: "CLICKED_IMG", payload: null });
   }
 
   return (

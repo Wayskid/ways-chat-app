@@ -9,12 +9,8 @@ import MsgInput from "./MsgInput";
 
 export default function Main() {
   const { activeChatState } = useContext(ActiveChatContext);
-  const {
-    state,
-    handleDeleteChat,
-    handleClearChat,
-    handleSendImg,
-  } = useContext(ChatAppContext);
+  const { state, handleDeleteChat, handleClearChat, handleSendImg } =
+    useContext(ChatAppContext);
 
   return (
     <div className="Main w-[calc(100%-280px)] border-l-txt-color border-l-[1px] relative bg-color-secondary">

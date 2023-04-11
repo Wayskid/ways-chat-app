@@ -4,8 +4,10 @@ import { auth } from "../firebase";
 import ContactList from "./ContactList";
 import Search from "./Search";
 import AuthContext from "../contexts/AuthContext";
+import { ActiveChatContext } from "../contexts/ActiveChatContext";
 export default function Aside() {
   const { currentUser } = useContext(AuthContext);
+  const { activeChatDispatch } = useContext(ActiveChatContext);
 
   return (
     <div className="aside w-[280px] shrink-0 text-text-color">
@@ -20,7 +22,14 @@ export default function Aside() {
           <p className="text-sm font-medium">{currentUser.displayName}</p>
           <button
             className="bg-color-secondary p-1 text-xs rounded-md"
-            onClick={() => signOut(auth)}
+            onClick={() => {
+              signOut(auth);
+              activeChatDispatch({ type: "DELETE_ACTIVE_CHAT" });
+              // dispatch({
+              //   type: "CONTACT_LIST",
+              // payload: [],
+              // });
+            }}
           >
             Logout
           </button>

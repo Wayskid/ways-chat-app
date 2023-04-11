@@ -76,7 +76,7 @@ export default function Signup() {
               payload: e.target.files[0],
             })
           }
-          accept="image/*"
+          accept="image/png, image/gif, image/jpeg"
         />
         <label
           htmlFor="userAvatar"

@@ -35,7 +35,9 @@ export default function MsgLine({ message }) {
         <img
           src={message.image}
           alt="sent pic"
-          className="h-[10rem] rounded-lg cursor-pointer"
+          className={`h-[10rem] cursor-pointer ${
+            currentUser.uid === message.senderId ? "" : "pl-[0.75rem]"
+          }`}
           onClick={handleViewImage}
         />
       )}
