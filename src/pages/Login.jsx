@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import ChatAppContext from "../contexts/ChatAppContext";
 import { motion } from "framer-motion";
+import { RiEyeLine } from "react-icons/ri";
+import { RiEyeCloseLine } from "react-icons/ri";
 
 export default function Login() {
   const { handleLogin, dispatch, state } = useContext(ChatAppContext);
@@ -36,13 +38,13 @@ export default function Login() {
             }
           />
         </label>
-        <label>
+        <label className="relative">
           <input
             required
-            type="password"
+            type={state.isPassShown ? "text" : "password"}
             name="loginPass"
             placeholder="Password"
-            className="w-[100%] rounded-md bg-transparent border-[1px] border-transparent border-b-[1px] border-b-txt-color outline-none focus:border-txt-color px-2 py-1 focus:placeholder-transparent placeholder:text-txt-color text-txt-color"
+            className="w-[100%] rounded-md bg-transparent border-[1px] border-transparent border-b-[1px] border-b-txt-color outline-none focus:border-txt-color px-2 py-1 focus:placeholder-transparent placeholder:text-txt-color text-txt-color pr-7"
             onChange={(e) =>
               dispatch({
                 type: "LOGIN",
@@ -51,6 +53,17 @@ export default function Login() {
               })
             }
           />
+          <button
+            className="mt-2 text-sm flex items-center gap-1 ml-2 absolute top-0 right-1"
+            type="button"
+            onClick={() => dispatch({ type: "SHOW_PASS" })}
+          >
+            {state.isPassShown ? (
+              <RiEyeLine className="text-xl" />
+            ) : (
+              <RiEyeCloseLine className="text-xl" />
+            )}
+          </button>
         </label>
         <button
           type="submit"

@@ -22,6 +22,7 @@ export const InitialState = {
   img_sent: null,
   view_img: false,
   clicked_img: null,
+  isPassShown: false,
 };
 
 export function ChatAppReducer(state, action) {
@@ -111,6 +112,11 @@ export function ChatAppReducer(state, action) {
       return {
         ...state,
         clicked_img: action.payload,
+      };
+    case "SHOW_PASS":
+      return {
+        ...state,
+        isPassShown: !state.isPassShown,
       };
     default:
       return state;
