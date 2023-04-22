@@ -13,12 +13,12 @@ export default function MessageList() {
         return <MsgLine message={message} key={message.id} />;
       })}
       {state.img_preview && (
-        <div className="absolute top-0 flex bg-color-primary h-[calc(100%-50px)] w-[100%] bg-opacity-60">
-          <div className="self-end px-2 pb-2 flex h-[18rem] w-[20rem] mx-auto">
+        <div className="absolute top-0 flex bg-color-primary h-[calc(100%-50px)] w-[100%] bg-opacity-60 justify-center">
+          <div className="flex px-2 pt-5">
             <img
               src={state.img_preview}
               alt="preview"
-              className="h-[100%] w-[100%]"
+              className=" max-w-[100%] h-[auto] object-contain"
             />
             <button type="button" onClick={handleCancelImage}>
               <AiFillCloseCircle className="absolute top-1 right-1 text-3xl text-[white]" />
@@ -34,7 +34,7 @@ export default function MessageList() {
         onChange={handleViewImage}
       />
       <div className="modal">
-        <div className="modal-box relative bg-color-primary rounded-md grid gap-2">
+        <div className="modal-box relative bg-color-primary rounded-md grid gap-2 max-w-[55rem]">
           <button
             className="btn btn-sm btn-circle absolute right-2 top-2 cursor-pointer"
             onClick={handleCloseViewImage}
@@ -46,22 +46,15 @@ export default function MessageList() {
             alt="sent pic"
             className="h-[100%] w-[100%]"
           />
-          <a
-            href={state.clicked_img}
-            target="_blank"
-            rel="noreferrer"
-            download="WaysChatImage"
-            className="w-[100%]"
-          >
-            <button
-              type="button"
-              className="bg-color-secondary text-lg rounded-md ease-in transition-all py-1 w-[100%]"
-            >
-              Save Image
-            </button>
-          </a>
         </div>
       </div>
+      {state.loader && (
+        <div className="wrapper absolute grid items-center w-[100%] h-[100%] justify-items-center top-0">
+          <div className="flex items-center justify-center ">
+            <div className="w-[8rem] h-[8rem] border-t-4 border-b-4 border-green-900 rounded-full animate-spin"></div>
+          </div>
+        </div>
+      )}
     </ul>
   );
 }

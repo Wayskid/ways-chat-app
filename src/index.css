@@ -19,21 +19,16 @@
 }
 
 body{
-  background-color: #a5a5a5;
+  background-color: #ffffff;
   font-family: 'Glory', sans-serif;
+  height: 100vh;
 }
 
 #root{
   display: grid;
   justify-items: center;
-  height: 100vh;
+  height: 100%;
   align-items: center;
-}
-
-.owner{
-  justify-self: right;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0;
 }
 
 /* .App{

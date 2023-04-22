@@ -9,7 +9,7 @@ export default function Search() {
       <input
         type="text"
         className="search border-b-text-color border-b-[1px] text-center rounded-b-lg outline-none focus:placeholder-transparent placeholder:italic bg-transparent w-[90%]"
-        placeholder="Search User"
+        placeholder="Search User Email"
         onChange={(e) => handleSearch(e.target.value)}
         value={state.search_val}
       />

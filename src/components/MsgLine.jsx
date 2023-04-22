@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import AuthContext from "../contexts/AuthContext";
 import moment from "moment/moment";
 import ChatAppContext from "../contexts/ChatAppContext";
+import { motion } from "framer-motion";
 
 export default function MsgLine({ message }) {
   const { currentUser } = useContext(AuthContext);
@@ -15,7 +16,14 @@ export default function MsgLine({ message }) {
   }, [message]);
 
   return (
-    <li
+    <motion.li
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.8,
+        delay: 0.1,
+        ease: [0, 0.71, 0.2, 1.01],
+      }}
       className={`chat  relative ${
         currentUser.uid === message.senderId ? "chat-end" : "chat-start"
       }`}
@@ -44,7 +52,7 @@ export default function MsgLine({ message }) {
       <time className="text-xs font-medium text-color-secondary absolute bottom-[-0.8rem] px-[0rem]">
         {moment(message.date.toDate()).calendar()}
       </time>
-    </li>
+    </motion.li>
 
     // <div className="chat chat-end">
   );

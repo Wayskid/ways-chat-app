@@ -25,10 +25,6 @@ export default function Aside() {
             onClick={() => {
               signOut(auth);
               activeChatDispatch({ type: "DELETE_ACTIVE_CHAT" });
-              // dispatch({
-              //   type: "CONTACT_LIST",
-              // payload: [],
-              // });
             }}
           >
             Logout

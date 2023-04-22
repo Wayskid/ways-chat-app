@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import MessageList from "./MessageList";
-import { IoIosLaptop } from "react-icons/io";
-import { VscArrowBoth } from "react-icons/vsc";
-import { GiSmartphone } from "react-icons/gi";
+import { IoMdChatbubbles } from "react-icons/io";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
 import ChatAppContext from "../contexts/ChatAppContext";
 import MsgInput from "./MsgInput";
@@ -78,16 +76,13 @@ export default function Main() {
       ) : (
         <div className="bg-color-secondary grid gap-2 text-center absolute top-1/2 translate-y-[-50%] left-1/2 translate-x-[-50%] w-[80%]">
           <div className="flex justify-self-center gap-3 items-center">
-            <IoIosLaptop className="text-[7rem] rotate-6" />
-            <VscArrowBoth className="text-[2.5rem]" />
-            <GiSmartphone className="text-[5rem] -rotate-6" />
+            <IoMdChatbubbles className="text-[8rem]" />
           </div>
-          <h1>WaysChat for Desktop</h1>
-          <p className="">
-            Send and receive messages using WaysChat. Use WaysChat on desktop
-            and mobile devices.
+          <h1 className="font-medium text-lg">WaysChat for Desktop</h1>
+          <p>
+            Send and receive messages using WaysChat.
           </p>
-          <p className="">End-to-end encrypted</p>
+          <p className="text-sm font-bold">End-to-end encrypted</p>
         </div>
       )}
     </div>

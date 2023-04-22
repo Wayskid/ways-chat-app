@@ -6,12 +6,14 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./pages/PrivateRoute";
 import ActiveChatProvider from "./contexts/ActiveChatContext";
 import { ChatAppProvider } from "./contexts/ChatAppContext";
+// import UserRoute from "./pages/UserRoute";
 
 export default function App() {
   return (
     <ActiveChatProvider>
       <ChatAppProvider>
         <Routes>
+          <Route path="/Login" element={<Login />}></Route>
           <Route
             path="/"
             element={
@@ -20,7 +22,6 @@ export default function App() {
               </PrivateRoute>
             }
           ></Route>
-          <Route path="/Login" element={<Login />}></Route>
           <Route path="/Signup" element={<SignUp />}></Route>
         </Routes>
       </ChatAppProvider>

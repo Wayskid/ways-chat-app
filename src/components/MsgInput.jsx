@@ -8,7 +8,7 @@ export default function MsgInput() {
     useContext(ChatAppContext);
   return (
     <form
-      className="bg-neutral-50 h-[50px] px-[10px] flex justify-center items-center gap-2"
+      className="bg-neutral-100 h-[50px] px-[10px] flex justify-center items-center gap-2"
       onSubmit={handleSendMessage}
     >
       <input

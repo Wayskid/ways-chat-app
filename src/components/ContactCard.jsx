@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
 import moment from "moment";
+import { BsImage } from "react-icons/bs";
 
 export default function ContactCard({ contactDet }) {
   const { handleActiveChat, activeChatState } = useContext(ActiveChatContext);
@@ -24,7 +25,10 @@ export default function ContactCard({ contactDet }) {
       </div>
       <div className="grid w-[70%]">
         <p className="text-xl font-medium">{contactDet.userInfo.displayName}</p>
-        <p className="lastMessage text-sm">
+        <p className="lastMessage text-sm flex gap-1">
+          {contactDet.lastMsg?.text === "Image" && (
+            <BsImage className="text-lg" />
+          )}
           {contactDet.lastMsg?.text.slice(0, 23)}
           {contactDet.lastMsg?.text.length > 23 && "..."}
         </p>

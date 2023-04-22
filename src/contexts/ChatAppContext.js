@@ -128,11 +128,12 @@ export function ChatAppProvider({ children }) {
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
+    dispatch({ type: "LOADER", payload: true });
+    dispatch({ type: "SEARCH_RESULT", payload: null });
+    dispatch({ type: "SEARCH_VAL", payload: "" });
     if (state.search_result.email !== currentUser.email) {
       try {
         const res = await getDoc(doc(db, "chats", combinedId));
-
-        dispatch({ type: "LOADER", payload: true });
 
         if (res.exists()) {
           await updateDoc(doc(db, "chats", combinedId), {
@@ -166,8 +167,6 @@ export function ChatAppProvider({ children }) {
         dispatch({ type: "LOADER", payload: false });
       } catch (error) {}
     }
-    dispatch({ type: "SEARCH_RESULT", payload: null });
-    dispatch({ type: "SEARCH_VAL", payload: "" });
   }
 
   //GET USER MESSAGES
@@ -192,7 +191,7 @@ export function ChatAppProvider({ children }) {
   async function handleSendMessage(e) {
     e.preventDefault();
 
-    dispatch({ type: "LOADER", payload: true });
+    dispatch({ type: "MESSAGE_VAL", payload: "" });
 
     await updateDoc(doc(db, "chats", activeChatState.chatId), {
       [currentUser.uid + ".messages"]: arrayUnion({
@@ -222,14 +221,12 @@ export function ChatAppProvider({ children }) {
       },
       [activeChatState.chatId + ".date"]: serverTimestamp(),
     });
-
-    dispatch({ type: "MESSAGE_VAL", payload: "" });
-    dispatch({ type: "LOADER", payload: false });
   }
 
   //IMAGE PREVIEW
   async function handlePreviewImg(e) {
     dispatch({ type: "IMG_SENT", payload: e.target.files[0] });
+    dispatch({ type: "LOADER", payload: true });
 
     if (e.target.files[0]) {
       const imgRef = ref(storage, `imgPreview/${uuid()}`);
@@ -238,6 +235,8 @@ export function ChatAppProvider({ children }) {
       const downloadURL = await getDownloadURL(imgRef);
       dispatch({ type: "IMG_PREVIEW", payload: downloadURL });
     }
+
+    dispatch({ type: "LOADER", payload: false });
   }
 
   //CANCEL SEND IMAGE

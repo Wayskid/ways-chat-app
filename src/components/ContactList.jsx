@@ -58,11 +58,15 @@ export default function ContactList() {
         <p className="text-center font-medium text-xs">User not found</p>
       )}
 
-      {state.contact_list
-        ?.sort((a, b) => b[1].date - a[1].date)
-        .map((contact) => {
-          return <ContactCard key={contact[0]} contactDet={contact[1]} />;
-        })}
+      {state.contact_list.length ? (
+        state.contact_list
+          ?.sort((a, b) => b[1].date - a[1].date)
+          .map((contact) => {
+            return <ContactCard key={contact[0]} contactDet={contact[1]} />;
+          })
+      ) : (
+        <p className="text-center text-md mt-4 px-3 text-neutral-400">Contact List is currently empty. Search user email to start a conversation</p>
+      )}
     </ul>
   );
 }
