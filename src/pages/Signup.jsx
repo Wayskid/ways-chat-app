@@ -87,6 +87,7 @@ export default function Signup() {
               className="mt-2 text-sm flex items-center gap-1 ml-2 absolute top-0 right-1"
               type="button"
               onClick={() => dispatch({ type: "SHOW_PASS" })}
+              name="Show Password"
             >
               {state.isPassShown ? (
                 <RiEyeLine className="text-xl" />
@@ -135,7 +136,7 @@ export default function Signup() {
           )}
           <button className="text-sm">
             Already have an account?{" "}
-            <Link to="/Login" className="text-[#4c8bf5] font-medium">
+            <Link to="/Login" className="text-[#bed3f7] font-medium">
               Login
             </Link>
           </button>
