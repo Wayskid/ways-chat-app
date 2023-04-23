@@ -24,11 +24,12 @@ export default function ContactCard({ contactDet }) {
         </div>
       </div>
       <div className="grid w-[70%]">
-        <p className="text-xl font-medium">{contactDet.userInfo.displayName}</p>
+        <p className="text-xl font-medium">
+          {contactDet.userInfo.displayName.slice(0, 8)}
+          {contactDet.userInfo.displayName.length > 8 && "..."}
+        </p>
         <p className="lastMessage text-sm flex gap-1">
-          {contactDet.lastMsg?.text === "Image" && (
-            <BsImage className="text-lg" />
-          )}
+          {contactDet.lastMsg?.isImage && <BsImage className="text-lg" />}
           {contactDet.lastMsg?.text.slice(0, 23)}
           {contactDet.lastMsg?.text.length > 23 && "..."}
         </p>

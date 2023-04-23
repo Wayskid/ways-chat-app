@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import MsgLine from "./MsgLine";
 import ChatAppContext from "../contexts/ChatAppContext";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -7,11 +7,19 @@ export default function MessageList() {
   const { state, handleCancelImage, handleCloseViewImage, handleViewImage } =
     useContext(ChatAppContext);
 
+  //SCROLL TO THE BOTTOM
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [state.message_list]);
+
   return (
     <ul className="messageList h-[calc(100%-110px)] grid gap-4 content-start py-4 overflow-auto bg-neutral-200">
       {state.message_list?.map((message) => {
         return <MsgLine message={message} key={message.id} />;
       })}
+      <div ref={scrollRef}></div>
       {state.img_preview && (
         <div className="absolute top-0 flex bg-color-primary h-[calc(100%-50px)] w-[100%] bg-opacity-60 justify-center">
           <div className="flex px-2 pt-5">

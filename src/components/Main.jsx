@@ -7,7 +7,7 @@ import MsgInput from "./MsgInput";
 
 export default function Main() {
   const { activeChatState } = useContext(ActiveChatContext);
-  const { state, handleDeleteChat, handleClearChat, handleSendImg } =
+  const { state, handleDeleteChat, handleClearChat, handleSendImg, dispatch } =
     useContext(ChatAppContext);
 
   return (
@@ -21,11 +21,12 @@ export default function Main() {
               </div>
             </div>
             <h3 className="contactNameHead font-medium text-xl">
-              {activeChatState.user.displayName}
+              {activeChatState.user.displayName.slice(0, 15)}
+              {activeChatState.user.displayName.length > 15 && "..."}
             </h3>
             <div className="dropdown dropdown-end ml-auto">
               <label
-                tabIndex={0}
+                onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}
                 className="btn m-1 bg-transparent border-none hover:bg-transparent"
               >
                 <div className="burger grid gap-1">
@@ -34,27 +35,26 @@ export default function Main() {
                   <div className="h-[5px] w-[5px] bg-txt-color rounded-full"></div>
                 </div>
               </label>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem]"
-              >
-                <li>
-                  <button
-                    className="p-2 active:bg-color-secondary hover:bg-color-secondary text-sm"
-                    onClick={() => handleDeleteChat(activeChatState.user)}
-                  >
-                    Delete Contact
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="p-2 active:bg-color-secondary hover:bg-color-secondary text-sm"
-                    onClick={() => handleClearChat(activeChatState.user)}
-                  >
-                    Clear Chat
-                  </button>
-                </li>
-              </ul>
+              {state.isChatMenu && (
+                <ul className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem]">
+                  <li onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}>
+                    <button
+                      className="p-2 active:bg-color-secondary hover:bg-color-secondary text-sm"
+                      onClick={() => handleDeleteChat(activeChatState.user)}
+                    >
+                      Delete Contact
+                    </button>
+                  </li>
+                  <li onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}>
+                    <button
+                      className="p-2 active:bg-color-secondary hover:bg-color-secondary text-sm"
+                      onClick={() => handleClearChat(activeChatState.user)}
+                    >
+                      Clear Chat
+                    </button>
+                  </li>
+                </ul>
+              )}
             </div>
           </header>
           <MessageList />
@@ -79,9 +79,7 @@ export default function Main() {
             <IoMdChatbubbles className="text-[8rem]" />
           </div>
           <h1 className="font-medium text-lg">WaysChat for Desktop</h1>
-          <p>
-            Send and receive messages using WaysChat.
-          </p>
+          <p>Send and receive messages using WaysChat.</p>
           <p className="text-sm font-bold">End-to-end encrypted</p>
         </div>
       )}

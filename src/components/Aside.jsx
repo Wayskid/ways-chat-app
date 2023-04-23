@@ -19,7 +19,10 @@ export default function Aside() {
               <img src={currentUser.photoURL} alt="User Avatar" />
             </div>
           </div>
-          <p className="text-sm font-medium">{currentUser.displayName}</p>
+          <p className="text-sm font-medium">
+            {currentUser.displayName.slice(0, 8)}
+            {currentUser.displayName.length > 8 && "..."}
+          </p>
           <button
             className="bg-color-secondary p-1 text-xs rounded-md"
             onClick={() => {

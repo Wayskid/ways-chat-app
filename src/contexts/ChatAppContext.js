@@ -25,7 +25,12 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import { ActiveChatContext } from "./ActiveChatContext";
 import uuid from "react-uuid";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 const ChatAppContext = createContext();
 
@@ -121,6 +126,11 @@ export function ChatAppProvider({ children }) {
     }
   }
 
+  function closeSearch() {
+    dispatch({ type: "SEARCH_RESULT", payload: null });
+    dispatch({ type: "SEARCH_VAL", payload: "" });
+  }
+
   //SELECT USER AND ADD TO CONTACT LIST
   async function handleSelect() {
     const user = state.search_result;
@@ -131,41 +141,56 @@ export function ChatAppProvider({ children }) {
     dispatch({ type: "LOADER", payload: true });
     dispatch({ type: "SEARCH_RESULT", payload: null });
     dispatch({ type: "SEARCH_VAL", payload: "" });
+
+    //Check if current user search current user email
     if (state.search_result.email !== currentUser.email) {
       try {
-        const res = await getDoc(doc(db, "chats", combinedId));
+        //Check if user is already in contactList
+        const docSnap = await getDoc(
+          doc(db, "userContactList", currentUser.uid)
+        );
 
-        if (res.exists()) {
-          await updateDoc(doc(db, "chats", combinedId), {
-            [currentUser.uid + ".messages"]: [],
-          });
+        if (Object.keys(docSnap.data()).includes(combinedId)) {
+          console.log("Already there");
         } else {
-          await setDoc(doc(db, "chats", combinedId), {
-            [currentUser.uid]: [],
-            [user.uid]: [],
+          const res = await getDoc(doc(db, "chats", combinedId));
+
+          //Check if doc exists
+          if (res.exists()) {
+            await updateDoc(doc(db, "chats", combinedId), {
+              [currentUser.uid + ".messages"]: [],
+            });
+          } else {
+            await setDoc(doc(db, "chats", combinedId), {
+              [currentUser.uid]: [],
+              [user.uid]: [],
+            });
+          }
+
+          await updateDoc(doc(db, "userContactList", currentUser.uid), {
+            [combinedId + ".userInfo"]: {
+              uid: user.uid,
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+            },
+            [combinedId + ".date"]: serverTimestamp(),
+          });
+
+          await updateDoc(doc(db, "userContactList", user.uid), {
+            [combinedId + ".userInfo"]: {
+              uid: currentUser.uid,
+              displayName: currentUser.displayName,
+              photoURL: currentUser.photoURL,
+            },
+            [combinedId + ".date"]: serverTimestamp(),
           });
         }
 
-        await updateDoc(doc(db, "userContactList", currentUser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-
-        await updateDoc(doc(db, "userContactList", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: currentUser.uid,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-
+        activeChatDispatch({ type: "CHANGE_ACTIVE_CHAT", payload: user });
         dispatch({ type: "LOADER", payload: false });
       } catch (error) {}
+    } else {
+      dispatch({ type: "LOADER", payload: false });
     }
   }
 
@@ -234,6 +259,7 @@ export function ChatAppProvider({ children }) {
       await uploadBytes(imgRef, e.target.files[0]);
       const downloadURL = await getDownloadURL(imgRef);
       dispatch({ type: "IMG_PREVIEW", payload: downloadURL });
+      dispatch({ type: "IMG_PREVIEW_REF", payload: imgRef });
     }
 
     dispatch({ type: "LOADER", payload: false });
@@ -243,12 +269,20 @@ export function ChatAppProvider({ children }) {
   function handleCancelImage() {
     dispatch({ type: "IMG_PREVIEW", payload: null });
     dispatch({ type: "IMG_SENT", payload: null });
+
+    // Delete the file
+    deleteObject(state.img_preview_ref)
+      .then(() => {
+        console.log("File deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   //SEND IMAGE
   async function handleSendImg() {
     dispatch({ type: "LOADER", payload: true });
-    handleCancelImage();
 
     await updateDoc(doc(db, "chats", activeChatState.chatId), {
       [currentUser.uid + ".messages"]: arrayUnion({
@@ -268,6 +302,7 @@ export function ChatAppProvider({ children }) {
     await updateDoc(doc(db, "userContactList", currentUser.uid), {
       [activeChatState.chatId + ".lastMsg"]: {
         text: "Image",
+        isImage: true,
       },
       [activeChatState.chatId + ".date"]: serverTimestamp(),
     });
@@ -275,11 +310,14 @@ export function ChatAppProvider({ children }) {
     await updateDoc(doc(db, "userContactList", activeChatState.user.uid), {
       [activeChatState.chatId + ".lastMsg"]: {
         text: "Image",
+        isImage: true,
       },
       [activeChatState.chatId + ".date"]: serverTimestamp(),
     });
 
     dispatch({ type: "LOADER", payload: false });
+    dispatch({ type: "IMG_PREVIEW", payload: null });
+    dispatch({ type: "IMG_SENT", payload: null });
   }
 
   //DELETE USER
@@ -347,6 +385,7 @@ export function ChatAppProvider({ children }) {
         handleLogin,
         dispatch,
         handleSearch,
+        closeSearch,
         handleSelect,
         handleSendMessage,
         handleDeleteChat,

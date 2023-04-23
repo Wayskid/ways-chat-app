@@ -19,10 +19,12 @@ export const InitialState = {
   messageVal: "",
   loader: false,
   img_preview: null,
+  img_preview_ref: null,
   img_sent: null,
   view_img: false,
   clicked_img: null,
   isPassShown: false,
+  isChatMenu: false,
 };
 
 export function ChatAppReducer(state, action) {
@@ -98,6 +100,11 @@ export function ChatAppReducer(state, action) {
         ...state,
         img_preview: action.payload,
       };
+    case "IMG_PREVIEW_REF":
+      return {
+        ...state,
+        img_preview_ref: action.payload,
+      };
     case "IMG_SENT":
       return {
         ...state,
@@ -117,6 +124,11 @@ export function ChatAppReducer(state, action) {
       return {
         ...state,
         isPassShown: !state.isPassShown,
+      };
+    case "CHAT_MENU_OPEN":
+      return {
+        ...state,
+        isChatMenu: !state.isChatMenu,
       };
     default:
       return state;
