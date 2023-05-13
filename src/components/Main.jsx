@@ -28,7 +28,7 @@ export default function Main() {
       {activeChatState.chatId !== "null" ? (
         <>
           <header className="mainHeader flex  gap-3 items-center bg-color-secondary text-neutral-50 h-[60px] px-[10px]">
-            <FaArrowLeft className="text-xl " onClick={showHide} />
+            <FaArrowLeft className="backIcon text-xl" onClick={showHide} />
             <div className="avatar">
               <div className="w-[32px] rounded-full">
                 <img src={activeChatState.user.photoURL} alt="Contact Avatar" />

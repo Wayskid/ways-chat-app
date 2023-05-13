@@ -40,13 +40,20 @@ body{
   transition: 0.3s ease-in-out;
 }
 
+.backIcon{
+  display: none;
+}
+
 
 /* Mobile View */
 
-@media (max-width: 560px){  
+@media (max-width: 500px){  
   
   .home{
     position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
   }
   
   .main{
@@ -55,7 +62,7 @@ body{
     left: 100%;
     width: 100%;
     height: 100%;
-    transition: 1s ease;
+    transition: 0.5s ease;
   }
   
   .showMain{
@@ -68,11 +75,15 @@ body{
     right: 100%;
     width: 100%;
     height: 100%;
-    transition: right 1s ease;
+    transition: right 0.5s ease;
   }
   
   .showAside{
     right: 0;
+  }
+
+  .backIcon{
+    display: grid;
   }
 
 }
