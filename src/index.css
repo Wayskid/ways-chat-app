@@ -4,7 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-
 ::-webkit-scrollbar{
   width: 0.3em;
 }
@@ -28,350 +27,52 @@ body{
   display: grid;
   justify-items: center;
   height: 100%;
-  align-items: center;
+  align-items: center; 
 }
 
-.Main .dropdown-content{
+.main .dropdown-content{
   visibility: visible !important;
   opacity: 1 !important;
 }
-
-/* .App{
-  width: min(1100px, 90%);
-  display: flex;
-  height: 650px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  color: #323232;
-  position: relative;
-} */
-
-/* .aside{
-  align-content: flex-start;
-  width: 24%;
-  display: flex;
-  flex-direction: column;
-} */
-
-/* .aside header{
-  background-color: #13aab1;
-  display: grid;
-  justify-content: center;
-  padding-block: 10px;
-  text-align: center;
-  border-top-left-radius: 10px;
-}
-
-.archiveSearch{
-  display: grid;
-  gap: 5px;
-  padding-block: 10px;
-  padding-inline: 5px;
-  border-bottom: 1px solid #323232;
-}
-
-.archive{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.searchPlus{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.searchInput{
-  border-radius: 2px;
-  border: 1px solid #323232;
-  text-indent: 5px;
-  text-align: center;
-  padding-block: 2px;
-  outline: none;
-  width: 100%;
-}
-
-.disappear{
-  opacity: 0;
-  pointer-events: none;
-}
-
-.searchPlus>:last-child{
-  cursor: pointer;
-  color: #046c71;
-} */
-
-
-/* .chatList{
-  display: grid;
-  height: 610px;
-  overflow: hidden;
-  overflow-y: scroll;
-  padding-inline: 7px;
-  align-content: flex-start;
-}
-
-.chatList>:last-child{
-  border-bottom: none;
-}
-
-.chatCard{
-  display: flex;
-  align-items: center;
-  padding: 15px 5px;
-  gap: 5px;
-  border-bottom: 0.2px solid rgba(80, 79, 79, 0.382);
-  cursor: pointer;
-}
-
-.chatCardLeft{
-  width: 100%; 
-}
-
-.chatCard h3{
-  font-size: 20px;
-}
-
-.msgPreview{
-  font-size: 13px;
-}
-
-.lastMod{
-  font-size: 10px;
-}
-*/
 
 .activeChat{
   background-color: #28c7ce;
   transition: 0.3s ease-in-out;
 }
 
-/* .noResult{
-  margin: 2rem auto 0 auto;
-  text-align: center;
-  word-break: break-word;
-}  */
 
-/*Main Styling*/
+/* Mobile View */
 
-/* .Main{
-  width: 76%;
-  display: grid;
-  position: relative;
-} */
+@media (max-width: 560px){  
+  
+  .home{
+    position: relative;
+  }
+  
+  .main{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    transition: 1s ease;
+  }
+  
+  .showMain{
+    left: 0;
+  }
+  
+  .aside{
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 100%;
+    height: 100%;
+    transition: right 1s ease;
+  }
+  
+  .showAside{
+    right: 0;
+  }
 
-/* .mainHeader{
-  padding: 18.4px;
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  background-color: #13aab1;
-  border-top-right-radius: 10px;
 }
-
-.chatMenu{
-  display: grid;
-  gap: 4px;
-  cursor: pointer;
-  padding: 0.5rem 1.1rem;
-  border-radius: 50%;
-  position: relative;
-}
-
-.chatMenu:hover{
-  background-color: #3232321c;
-}
-
-.chatMenu div{
-  width: 4px;
-  height: 4px;
-  background-color: #000000c9;
-  border-radius: 50%;
-}
-
-.mainHeaderMenu{
-  position: absolute;
-  background-color: #165065;
-  display: grid;
-  right: 1rem;
-  bottom: -7rem;
-  width: max-content;
-  text-align: center;
-  color: #ffffff;
-}
-
-.mainHeaderMenu>*{
-  padding: 0.6rem 1rem;
-  font-size: 14px;
-}
-
-.mainHeaderMenu>*:hover{
-  transition: all 0.2s ease-in-out;
-  background-color: #28c7ce;
-  color: #323232;
-}
-
-.messageList{
-  display: grid;
-  gap: 15px;
-  height: 613px;
-  overflow: hidden;
-  overflow-y: scroll;
-  padding: 10px 20px;
-  align-content: flex-start;
-}
-
-.justifyLeft{
-  justify-self: left;
-}
-
-.justifyRight{
-  justify-self: right;
-}
-
-.messageLine{
-  background-color: #28c7ce;
-  display: flex;
-  justify-content: space-between;
-  gap: 13px;
-  padding: 7px 10px;
-  border-radius: 7px;
-}
-
-.msg{
-  font-size: 15px;
-}
-
-.timeSent{
-  font-size: 12px;
-  align-self: flex-end;
-}
-
-.chatFooter{
-  padding: 13px 20px;
-  background-color: #13aab1;
-  border-bottom-right-radius: 10px;
-}
-
-.Main form{
-  display: flex;
-  background-color: #ffffff;
-  padding: 6px 10px;
-  gap: 10px;
-  border-radius: 5px;
-}
-
-form input{
-  background: none;
-  border: none;
-  width: 100%;
-  text-indent: 9px;
-  outline: none;
-  font-size: 16.5px;
-}
-
-form button{
-  padding: 7px 25px;
-  background-color: #13aab1;
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
-} */
-
-/* Main Initial*/
-
-/* .mainInitial{
-  place-self: center;
-  text-align: center;
-  display: grid;
-  gap: 0.3rem;
-}
-
-.icons{
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.icons>*:first-child{
-  rotate: 7deg;
-  height: 9.5rem;
-}
-
-.icons>*:last-child{
-  rotate: -7deg;
-  height: 6rem;
-  width: 6rem;
-}
-
-.arrow{
-  height: 2rem;
-  width: 4rem;
-}
-
-.des{
-  width: 65%;
-  justify-self: center;
-  font-size: 14px;
-}
-
-.encrypt{
-  position: absolute;
-  bottom: 3%;
-  left: 50%;
-  translate: -50% 0;
-}
-
-Add contact
-.newContactPopup{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  color: #323232;
-  background-color: #035459b0;
-  width: 100%;
-  user-select: none;
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  border-radius: 10px;
-  display: none;
-}
-
-.showAddNewContact{
-  display: grid;
-}
-
-.popupContent{
-  display: grid;
-  gap: 1rem;
-  background-color: #ffffff;
-}
-
-.newContactHead{
-  background-color: #13aab1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-.closeNewContactBtn{
-  cursor: pointer;
-}
-
-.newContactForm{
-  display: grid;
-  gap: 0.7rem;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-.newContactForm input{
-  background-color: #13a9b163;
-  padding-block: 0.5rem;
-} */
-

@@ -30,7 +30,7 @@ export default function Home() {
             delay: 0.2,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          className="home w-home-width min-w-[720px] h-home-height rounded-lg text-txt-color relative flex overflow-hidden shadow-xl"
+          className="home w-home-width h-home-height rounded-lg text-txt-color relative flex overflow-hidden shadow-xl"
         >
           <Aside />
           <Main />

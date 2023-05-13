@@ -25,6 +25,8 @@ export const InitialState = {
   clicked_img: null,
   isPassShown: false,
   isChatMenu: false,
+  showMain: false,
+  showAside: true,
 };
 
 export function ChatAppReducer(state, action) {
@@ -129,6 +131,16 @@ export function ChatAppReducer(state, action) {
       return {
         ...state,
         isChatMenu: !state.isChatMenu,
+      };
+    case "SHOW_MAIN":
+      return {
+        ...state,
+        showMain: !state.showMain,
+      };
+    case "SHOW_ASIDE":
+      return {
+        ...state,
+        showAside: !state.showAside,
       };
     default:
       return state;

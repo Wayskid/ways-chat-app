@@ -7,7 +7,6 @@ import PrivateRoute from "./pages/PrivateRoute";
 import ActiveChatProvider from "./contexts/ActiveChatContext";
 import { ChatAppProvider } from "./contexts/ChatAppContext";
 import NotFound from "./pages/NotFound";
-// import UserRoute from "./pages/UserRoute";
 
 export default function App() {
   return (

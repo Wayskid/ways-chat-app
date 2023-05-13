@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
 import moment from "moment";
 import { BsImage } from "react-icons/bs";
+import ChatAppContext from "../contexts/ChatAppContext";
 
 export default function ContactCard({ contactDet }) {
   const { handleActiveChat, activeChatState } = useContext(ActiveChatContext);
+  const { showHide } = useContext(ChatAppContext);
 
   return (
     <li
@@ -12,7 +14,10 @@ export default function ContactCard({ contactDet }) {
         contactDet.userInfo.uid === activeChatState.user.uid &&
         "bg-color-secondary"
       } rounded-md`}
-      onClick={() => handleActiveChat(contactDet.userInfo)}
+      onClick={() => {
+        handleActiveChat(contactDet.userInfo);
+        showHide();
+      }}
     >
       <div className="avatar w-[20%] flex justify-center">
         <div className="w-[40px] rounded-full flex">

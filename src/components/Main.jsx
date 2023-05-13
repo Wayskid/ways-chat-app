@@ -4,19 +4,33 @@ import { IoMdChatbubbles } from "react-icons/io";
 import { ActiveChatContext } from "../contexts/ActiveChatContext";
 import ChatAppContext from "../contexts/ChatAppContext";
 import MsgInput from "./MsgInput";
+import { FaArrowLeft } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function Main() {
   const { activeChatState } = useContext(ActiveChatContext);
-  const { state, handleDeleteChat, handleClearChat, handleSendImg, dispatch } =
-    useContext(ChatAppContext);
+
+  const {
+    state,
+    handleDeleteChat,
+    handleClearChat,
+    handleSendImg,
+    dispatch,
+    showHide,
+  } = useContext(ChatAppContext);
 
   return (
-    <div className="Main w-[calc(100%-280px)] border-l-txt-color border-l-[1px] relative bg-color-secondary">
+    <div
+      className={`main w-[calc(100%-280px)] border-l-txt-color border-l-[1px] relative bg-color-secondary ${
+        state.showMain && "showMain"
+      }`}
+    >
       {activeChatState.chatId !== "null" ? (
         <>
           <header className="mainHeader flex  gap-3 items-center bg-color-secondary text-neutral-50 h-[60px] px-[10px]">
+            <FaArrowLeft className="text-xl " onClick={showHide} />
             <div className="avatar">
-              <div className="w-[24px] rounded-xl">
+              <div className="w-[32px] rounded-full">
                 <img src={activeChatState.user.photoURL} alt="Contact Avatar" />
               </div>
             </div>
@@ -36,7 +50,12 @@ export default function Main() {
                 </div>
               </label>
               {state.isChatMenu && (
-                <ul className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem]">
+                <motion.ul
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                  className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem] top-[3rem]"
+                >
                   <li onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}>
                     <button
                       className="p-2 active:bg-color-secondary hover:bg-color-secondary text-sm"
@@ -53,7 +72,7 @@ export default function Main() {
                       Clear Chat
                     </button>
                   </li>
-                </ul>
+                </motion.ul>
               )}
             </div>
           </header>

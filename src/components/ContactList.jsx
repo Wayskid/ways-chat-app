@@ -7,7 +7,7 @@ import AuthContext from "../contexts/AuthContext";
 import { MdClose } from "react-icons/md";
 
 export default function ContactList() {
-  const { state, handleSelect, dispatch, closeSearch } =
+  const { state, handleSelect, dispatch, closeSearch, showHide } =
     useContext(ChatAppContext);
   const { currentUser } = useContext(AuthContext);
 
@@ -38,7 +38,10 @@ export default function ContactList() {
         <div className="relative cursor-pointer">
           <li
             className="searchCard flex py-3 gap-4 items-center px-[10px] border-b-[1px] w-[100%] hover:bg-color-secondary cursor-pointer rounded-md relative"
-            onClick={handleSelect}
+            onClick={() => {
+              handleSelect();
+              showHide();
+            }}
           >
             <div className="avatar">
               <div className="w-[40px] rounded-full flex">

@@ -328,6 +328,8 @@ export function ChatAppProvider({ children }) {
         : user.uid + currentUser.uid;
 
     dispatch({ type: "LOADER", payload: true });
+    dispatch({ type: "SHOW_MAIN" });
+    dispatch({ type: "SHOW_ASIDE" });
 
     try {
       activeChatDispatch({ type: "DELETE_ACTIVE_CHAT" });
@@ -376,6 +378,12 @@ export function ChatAppProvider({ children }) {
     dispatch({ type: "VIEW_IMG", payload: false });
   }
 
+  //Mobile View
+  function showHide() {
+    dispatch({ type: "SHOW_MAIN" });
+    dispatch({ type: "SHOW_ASIDE" });
+  }
+
   return (
     <ChatAppContext.Provider
       value={{
@@ -395,6 +403,7 @@ export function ChatAppProvider({ children }) {
         handleSendImg,
         handleViewImage,
         handleCloseViewImage,
+        showHide,
       }}
     >
       {children}
