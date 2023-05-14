@@ -17,11 +17,14 @@
   display: none;
 }
 
+html{
+  height: 100%;
+}
+
 body{
   background-color: #ffffff;
   font-family: 'Glory', sans-serif;
-  height: 100vh;
-  height: -webkit-fill-available;
+  height: 100%;
 }
 
 #root{

@@ -97,9 +97,9 @@ export default function Main() {
           <div className="flex justify-self-center gap-3 items-center">
             <IoMdChatbubbles className="text-[8rem]" />
           </div>
-          <h1 className="font-medium text-lg">WaysChat for Desktop</h1>
+          <h1 className="font-medium text-lg">WaysChat for Desktop and Mobile</h1>
           <p>Send and receive messages using WaysChat.</p>
-          <p className="text-sm font-bold">End-to-end encrypted</p>
+          <p className="text-sm font-bold">End-to-End encrypted</p>
         </div>
       )}
     </div>
