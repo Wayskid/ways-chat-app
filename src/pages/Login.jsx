@@ -10,7 +10,7 @@ export default function Login() {
 
   return (
     <form
-      className="signup bg-color-primary grid justify-items-center text-txt-color h-[100%] w-[100vw] pb-7"
+      className="signup bg-color-primary grid justify-items-center text-txt-color h-[100%] w-[100vw]"
       onSubmit={handleLogin}
     >
       <motion.div
@@ -21,7 +21,7 @@ export default function Login() {
           delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="grid w-[80%] h-[70%] justify-items-center gap-10 self-center grid-rows-[0.5fr_1fr_3fr]"
+        className="grid w-[80%] h-[70%] justify-items-center gap-8 self-center grid-rows-[0.5fr_1fr_3fr]"
       >
         <h1 className="text-2xl text-center font-bold mb-5 text-color-msg">
           WaysChat
@@ -32,7 +32,7 @@ export default function Login() {
             Sign in using your WaysChat Account
           </p>
         </div>
-        <div className="inputsContainer grid gap-7 w-[min(25rem,100%)]">
+        <div className="inputsContainer grid gap-4 w-[min(25rem,100%)]">
           <label>
             <input
               required

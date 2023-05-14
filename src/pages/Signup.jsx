@@ -11,7 +11,7 @@ export default function Signup() {
 
   return (
     <form
-      className="signup bg-color-primary grid justify-items-center text-txt-color h-[100%] w-[100vw] pb-7"
+      className="signup bg-color-primary grid justify-items-center text-txt-color h-[100%] w-[100vw]"
       onSubmit={handleSignup}
     >
       <motion.div
@@ -22,16 +22,18 @@ export default function Signup() {
           delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="grid w-[80%] h-[70%] justify-items-center gap-10 self-center grid-rows-[0.5fr_1fr_3fr]"
+        className="grid w-[80%] h-[70%] justify-items-center gap-5 self-center grid-rows-[0.5fr_0.8fr_3fr]"
       >
         <h1 className="text-2xl text-center font-bold mb-5 text-color-msg">
           WaysChat
         </h1>
         <div className="md:w-[25%] rounded-lg">
           <p className="text-4xl text-center font-medium">Sign Up</p>
-          <p className="text-md text-center">Sign up to WaysChat</p>
+          <p className="text-md text-center">
+            Join the fast growing WaysChat Family
+          </p>
         </div>
-        <div className="inputsContainer grid gap-7 w-[min(25rem,100%)]">
+        <div className="inputsContainer grid gap-4 w-[min(25rem,100%)]">
           <label>
             <input
               required
@@ -113,7 +115,10 @@ export default function Signup() {
             htmlFor="userAvatar"
             className="flex gap-2 items-center font-semibold justify-self-center cursor-pointer"
           >
-            <ImFilePicture /> Upload Avatar
+            <ImFilePicture />{" "}
+            {state.user_avatar
+              ? "Image uploaded"
+              : "Upload Avatar"}
           </label>
           <button
             type="submit"
