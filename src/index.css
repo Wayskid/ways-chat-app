@@ -17,10 +17,6 @@
   display: none;
 }
 
-html {
-  height: -webkit-fill-available;
-}
-
 body{
   background-color: #ffffff;
   font-family: 'Glory', sans-serif;
