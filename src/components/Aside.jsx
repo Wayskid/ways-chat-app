@@ -31,7 +31,7 @@ export default function Aside() {
             {currentUser.displayName.length > 8 && "..."}
           </p>
           <button
-            className="bg-color-secondary p-1 text-xs rounded-md"
+            className="bg-color-secondary p-1 text-xs"
             onClick={() => {
               signOut(auth);
               activeChatDispatch({ type: "DELETE_ACTIVE_CHAT" });

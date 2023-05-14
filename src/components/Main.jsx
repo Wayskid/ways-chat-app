@@ -28,7 +28,10 @@ export default function Main() {
       {activeChatState.chatId !== "null" ? (
         <>
           <header className="mainHeader flex  gap-3 items-center bg-color-secondary text-neutral-50 h-[60px] px-[10px]">
-            <FaArrowLeft className="backIcon text-xl" onClick={showHide} />
+            <FaArrowLeft
+              className="backIcon text-xl cursor-pointer"
+              onClick={showHide}
+            />
             <div className="avatar">
               <div className="w-[32px] rounded-full">
                 <img src={activeChatState.user.photoURL} alt="Contact Avatar" />
@@ -54,7 +57,7 @@ export default function Main() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4 }}
-                  className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem] top-[3rem]"
+                  className="dropdown-content menu shadow bg-color-primary w-[7rem] top-[3rem]"
                 >
                   <li onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}>
                     <button

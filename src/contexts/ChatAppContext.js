@@ -126,6 +126,7 @@ export function ChatAppProvider({ children }) {
     }
   }
 
+  //Close search
   function closeSearch() {
     dispatch({ type: "SEARCH_RESULT", payload: null });
     dispatch({ type: "SEARCH_VAL", payload: "" });
@@ -151,7 +152,7 @@ export function ChatAppProvider({ children }) {
         );
 
         if (Object.keys(docSnap.data()).includes(combinedId)) {
-          console.log("Already there");
+          //Already there do nothing
         } else {
           const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -191,6 +192,8 @@ export function ChatAppProvider({ children }) {
       } catch (error) {}
     } else {
       dispatch({ type: "LOADER", payload: false });
+      dispatch({ type: "SHOW_MAIN" });
+      dispatch({ type: "SHOW_ASIDE" });
     }
   }
 
