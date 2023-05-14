@@ -53,7 +53,7 @@ export default function Main() {
                 <motion.ul
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
+                  transition={{ duration: 0.4 }}
                   className="dropdown-content menu shadow bg-color-primary rounded-md w-[6rem] top-[3rem]"
                 >
                   <li onClick={() => dispatch({ type: "CHAT_MENU_OPEN" })}>
@@ -97,7 +97,9 @@ export default function Main() {
           <div className="flex justify-self-center gap-3 items-center">
             <IoMdChatbubbles className="text-[8rem]" />
           </div>
-          <h1 className="font-medium text-lg">WaysChat for Desktop and Mobile</h1>
+          <h1 className="font-medium text-lg">
+            WaysChat for Desktop and Mobile
+          </h1>
           <p>Send and receive messages using WaysChat.</p>
           <p className="text-sm font-bold">End-to-End encrypted</p>
         </div>
