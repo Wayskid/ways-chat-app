@@ -22,7 +22,7 @@ html{
 }
 
 body{
-  background-color: #ffffff;
+  background-color: #89bbe0;
   font-family: 'Glory', sans-serif;
   height: 100%;
 }
@@ -37,11 +37,6 @@ body{
 .main .dropdown-content{
   visibility: visible !important;
   opacity: 1 !important;
-}
-
-.activeChat{
-  background-color: #28c7ce;
-  transition: 0.3s ease-in-out;
 }
 
 .backIcon{
